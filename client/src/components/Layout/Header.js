@@ -54,6 +54,12 @@ const Header = () => {
                 >
                   Products
                 </NavLink>
+                <NavLink
+                    to="/rentalPage"
+                    className="text-gray-100 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Rent 
+                  </NavLink>
 
                 <Badge count={cart?.length}>
                   <NavLink
@@ -63,14 +69,9 @@ const Header = () => {
                     Cart
                   </NavLink>
                 </Badge>
-                <Badge count={cart?.length}>
-                  <NavLink
-                    to="/cart"
-                    className="text-gray-100 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Gallery
-                  </NavLink>
-                </Badge>
+                
+                 
+                
 
                 <SearchInput  />
               </div>
@@ -210,6 +211,13 @@ const Header = () => {
             Products
           </NavLink>
 
+          <NavLink
+                    to="/rentalPage"
+                    className="text-gray-100 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Rent
+                  </NavLink>
+
           <Badge count={cart?.length}>
             <NavLink
               to="/cart"
@@ -219,14 +227,9 @@ const Header = () => {
             </NavLink>
           </Badge>
 
-          <Badge count={cart?.length}>
-                  <NavLink
-                    to="/cart"
-                    className="text-gray-100 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Gallery
-                  </NavLink>
-                </Badge>
+          
+                 
+               
 
           <SearchInput />
         </div>

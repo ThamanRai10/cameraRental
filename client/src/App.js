@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 // import Hero from "./pages/hero";
 import HomePage from "./pages/HomePage";
+import rentalPage from "./pages/rentalPage"
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Policy from "./pages/Policy";
@@ -33,6 +34,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element = {<HomePage />}/>
+        <Route path="/rentalPage" element = {<rentalPage />}/>
         {/* <Route path="/product" element={<HomePage />} /> */}
         <Route path="/search" element={<SearchPage />} />
         <Route path="/product/:slug" element={<ProductDetails />} />

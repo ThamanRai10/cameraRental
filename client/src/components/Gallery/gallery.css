@@ -1,0 +1,33 @@
+/* gallery.css */
+
+.main {
+    margin: 88px auto;
+    width: 90%;
+    text-align: center;
+  }
+  
+  .gallery {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap; /* Prevents wrapping onto multiple lines */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+  }
+  
+  .gallery img {
+    width: 25%; /* Each image takes up one quarter of the container */
+    height: auto; /* Let the height adjust to maintain aspect ratio */
+    max-width: 200px; /* Adjust as needed */
+    border-radius: 10px;
+    object-fit: contain;
+    /* transition: transform 0.3s ease; */
+  }
+  
+  /* .gallerychild{
+    width:100%;
+    object-fit: contain;
+  } */
+  /* .gallery img:hover {
+    transform: scale(1.1);
+  }
+   */

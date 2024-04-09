@@ -1,0 +1,24 @@
+.services{
+    padding-left: 10%;
+    padding-right: 10%;
+    margin: 80px auto;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.services img{
+    width: 100%;
+    border: radius 10px; ;
+    display: block;
+}
+
+.services {
+    flex-basis: 31%;
+    position: relative;
+}
+
+
+

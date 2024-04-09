@@ -28,7 +28,7 @@ const Layout = ({ children, title, description, keywords, author }) => {
   );
 };
 Layout.defaultProps = {
-  title: "Camera Rental  Shop Now",
+  title: "Shop Now",
   description: "Camera Rental",
   keywords: "MERN",
   author: "Thaman",

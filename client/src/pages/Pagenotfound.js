@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout/Layout";
+import { NavLink } from "react-router-dom";
 
 const Pagenotfound = () => {
   return (
@@ -10,12 +11,14 @@ const Pagenotfound = () => {
           <p className="text-gray-600 mb-8">
             The page you are looking for does not exist.
           </p>
+          <NavLink to = '/'>
           <button
             onClick={() => window.history.back()}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
             Go Back
           </button>
+          </NavLink>
         </div>
       </div>
     </Layout>

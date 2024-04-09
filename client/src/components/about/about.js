@@ -12,7 +12,8 @@ const about = () => {
             <h3>ABOUT CAMERA RENTAL</h3>
             <h2>Check out our details and work process</h2>
             <p>
-              Camera Rental offers comprehensive rental services for cameras,
+              Camera Rental offers comprehensive 
+              rental services for cameras,
               completelight & grips rental, and full postproduction tools
               including color grading, videoediting, Visual effects, and audio
               debugging. Customers can rent their preferred brands of camera,

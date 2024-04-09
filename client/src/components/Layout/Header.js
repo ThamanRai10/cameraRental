@@ -43,12 +43,12 @@ const Header = () => {
           <div className="flex space-x-48 items-center">
             <div className="space-x-10 flex flex-shrink-0">
               <AiOutlineShop className=" text-white text-xl mt-[3px]" />
-              <span className="text-white font-semibold">Camera Rental</span>
+              <span className="text-white font-semibold"><NavLink to ="/">Camera Rental</NavLink></span>
             </div>
             <div className="hidden md:block">
               <div className="  flex items-baseline space-x-6">
                 <NavLink
-                  to="/"
+                  to="Product"
                   // activeClassName="text-white bg-gray-900"
                   className="text-gray-100 hover:bg-blue-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
@@ -205,18 +205,18 @@ const Header = () => {
       <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <NavLink
-            to="/"
+            to="/Product"
             className="text-gray-300 hover:bg-blue-400 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
           >
             Products
           </NavLink>
 
-          <NavLink
+          {/* <NavLink
                     to="/rentalPage"
                     className="text-gray-100 hover:bg-blue-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Rent
-                  </NavLink>
+                  </NavLink> */}
 
           <Badge count={cart?.length}>
             <NavLink

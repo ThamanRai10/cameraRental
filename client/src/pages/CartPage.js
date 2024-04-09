@@ -22,9 +22,9 @@ const CartPage = () => {
       cart?.map((item) => {
         total = total + item.price;
       });
-      return total.toLocaleString("en-US", {
+      return total.toLocaleString("en-NP", {
         style: "currency",
-        currency: "USD",
+        currency: "NRP",
       });
     } catch (error) {
       console.log(error);
@@ -115,7 +115,7 @@ const CartPage = () => {
                     <p className="text-sm">{p.description.substring(0, 30)}</p>
                   </div>
                   <div className="flex justify-between items-center">
-                    <h1 className="text-lg font-semibold">Price: ${p.price}</h1>
+                    <h1 className="text-lg font-semibold">Price: Rs{p.price}</h1>
                     <button
                       onClick={() => removeItem(p._id)}
                       className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded"

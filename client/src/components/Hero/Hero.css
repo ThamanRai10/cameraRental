@@ -1,7 +1,7 @@
 .hero{
     width :100%;
     min-height : 100vh;
-    background:linear-gradient(rgba(8,0,58,0.7),rgba(8,0,58,0.7)), url(../../assets/hero.png);
+    background:linear-gradient(rgba(10, 8, 26, 0.7),rgba(10, 8, 26, 0.7)), url(../../assets/Homepage.jpg);
     background-size: cover;
     background-position: center;
     color : #fff;
@@ -37,7 +37,7 @@
     display: inline-block;
 } */
 
-.btn{
+.btn {
     background-color: #F5F5F5;
     color: #212121;
     padding: 14px 25px;
@@ -49,9 +49,16 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition: opacity 0.3s; /* Add transition for smoother hover effect */
 }
 
-.btn img{
+.btn:hover {
+    background-color: #7e7373;
+    opacity: 0.8; /* Change opacity on hover */
+    color:rgb(0, 0, 0);
+}
+
+.btn img {
     width: 20px;
     margin-left: 10px;
 }

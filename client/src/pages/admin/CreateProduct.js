@@ -16,7 +16,7 @@ const CreateProduct = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
-  // const [shipping, setShipping] = useState("");
+  const [shipping, setShipping] = useState("");
   const [photo, setPhoto] = useState("");
 
   // Get all category
@@ -160,7 +160,7 @@ const CreateProduct = () => {
                   }}
                 />
               </div>
-              {/* <div className="mb-3">
+              <div className="mb-3">
                 <Select
                   bordered={false}
                   placeholder="Select Shipping"
@@ -174,7 +174,7 @@ const CreateProduct = () => {
                   <Option value="0">No</Option>
                   <Option value="1">Yes</Option>
                 </Select>
-              </div> */}
+              </div>
               <div className="mb-3">
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleCreate}>
                   CREATE PRODUCT

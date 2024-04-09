@@ -403,7 +403,7 @@ export const braintreePaymentController = async (req, res) => {
           cart.forEach((product, index) => {
             emailContent += `${index + 1}. Product Name: ${product.name}\n`;
             emailContent += `   Description: ${product.description}\n`;
-            emailContent += `   Price: $${product.price.toFixed(2)}\n\n`;
+            emailContent += `   Price: Rs${product.price.toFixed(2)}\n\n`;
           });
           emailContent += `Total Price: $${total.toFixed(2)}\n\n`;
 

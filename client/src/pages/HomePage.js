@@ -91,6 +91,13 @@ const HomePage = () => {
     }
   };
 
+  // Add to Cart
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+    localStorage.setItem("cart", JSON.stringify([...cart, product]));
+    toast.success("Item Added to Cart");
+  };
+
   return (
     <Layout title={"All Product - Best offers"}>
       <div className="flex flex-col lg:flex-row pt-5">
@@ -98,12 +105,12 @@ const HomePage = () => {
           <h1 className="text-center font-sans font-semibold text-xl">
             Filter by category
           </h1>
-          <div className="flex flex-col ">
+          <div className="flex flex-col">
             {categories?.map((c) => (
-              <label key={c._id} className="flex items-center space-x-2   mb-4">
+              <label key={c._id} className="flex items-center space-x-2 mb-4">
                 <input
                   type="checkbox"
-                  className="form-checkbox text-blue-500 "
+                  className="form-checkbox text-blue-500"
                   onChange={(e) => handleFilter(e.target.checked, c._id)}
                 />
                 <span className="text-gray-700">{c.name}</span>
@@ -142,23 +149,22 @@ const HomePage = () => {
           </div>
         </div>
         <div className="w-full lg:w-3/4">
-          <h1 className="text-center font-bold text-3xl">All Product</h1>
+          <h1 className="text-center font-bold text-3xl">All Products</h1>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-8">
             {products?.map((p) => (
-              <div
-                className="border  flex flex-col items-center"
-                key={p._id}
-              >
-                <img
-                  className="w-[50%] h-[50%] object-cover mb-4"
-                  src={`/api/v1/product/product-photo/${p._id}`}
-                  alt={p.name}
-                />
+              <div className="border flex flex-col items-center" key={p._id}>
+                <a href={`/product/${p.slug}`}>
+                  <img
+                    className="w-48 h-48  mb-4"
+                    src={`/api/v1/product/product-photo/${p._id}`}
+                    alt={p.name}
+                  />
+                </a>
                 <div className="text-center">
                   <h5 className="font-semibold">{p.name}</h5>
                   <p className="text-sm">{p.description.substring(0, 40)}</p>
-                  <p className="text-sm"> $ {p.price}</p>
-                  <div className="flex gap-4">
+                  <p className="text-sm">Rs {p.price}</p>
+                  <div className="flex justify-center gap-4">
                     <button
                       onClick={() => navigate(`/product/${p.slug}`)}
                       className="bg-blue-500 hover:bg-blue-700 text-sm text-white font-semibold py-2 px-4 rounded"
@@ -166,17 +172,10 @@ const HomePage = () => {
                       See Details
                     </button>
                     <button
-                      onClick={() => {
-                        setCart([...cart, p]);
-                        localStorage.setItem(
-                          "cart",
-                          JSON.stringify([...cart, p ])
-                        );
-                        toast.success("Item Added in the Cart");
-                      }}
-                      className="bg-gray-500 text-sm  hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded"
+                      onClick={() => addToCart(p)}
+                      className="bg-red-500 hover:bg-gray-700 text-sm text-white font-semibold py-2 px-4 rounded"
                     >
-                      Add to cart
+                      Add to Cart
                     </button>
                   </div>
                 </div>

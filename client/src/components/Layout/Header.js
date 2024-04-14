@@ -69,10 +69,7 @@ const Header = () => {
                     Cart
                   </NavLink>
                 </Badge>
-                
-                 
-                
-                
+              
                 <SearchInput  />
               </div>
             </div>

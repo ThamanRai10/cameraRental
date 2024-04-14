@@ -70,6 +70,7 @@ const AdminOrder = () => {
                     <th className="px-4 py-2">Status</th>
                     <th className="px-4 py-2">Buyer</th>
                     <th className="px-4 py-2">Ordered Date</th>
+                    <th className="px-4 py-2">Product Name</th>
                     <th className="px-4 py-2">Quantity</th>
                     <th className="px-4 py-2">Payment</th>
                   </tr>
@@ -94,8 +95,9 @@ const AdminOrder = () => {
                       </td>
                       <td className="px-4 py-2">{o?.buyer?.name}</td>
                       <td className="px-4 py-2">
-                        {moment(o?.createAt).fromNow()}
+                        {moment(o?.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
                       </td>
+                      <td className="px-4 py-2">{o?.products[0]?.name}</td>
                       <td className="px-4 py-2">{o?.products?.length}</td>
                       <td className="px-4 py-2">
                         {o?.payment.success ? "Success" : "Failed"}

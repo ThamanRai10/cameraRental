@@ -51,7 +51,9 @@ const Users = () => {
                       <td className="px-4 py-2 uppercase">{user.name}</td>
                       <td className="px-4 py-2">{user.address}</td>
                       <td className="px-4 py-2">{user.phone}</td>
-                      <td className="px-4 py-2">{user.role}</td>
+                      <td className="px-4 py-2">
+                        {user.role === 1 ? "Admin" : "Customer"}
+                      </td>
                       <td className="px-4 py-2">{user.email}</td>
                     </tr>
                   ))}

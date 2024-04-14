@@ -101,53 +101,53 @@ const HomePage = () => {
   return (
     <Layout title={"All Product - Best offers"}>
       <div className="flex flex-col lg:flex-row pt-5">
-        <div className="w-full lg:w-1/4 m-2">
-          <h1 className="text-center font-sans font-semibold text-xl">
-            Filter by category
-          </h1>
-          <div className="flex flex-col">
-            {categories?.map((c) => (
-              <label key={c._id} className="flex items-center space-x-2 mb-4">
-                <input
-                  type="checkbox"
-                  className="form-checkbox text-blue-500"
-                  onChange={(e) => handleFilter(e.target.checked, c._id)}
-                />
-                <span className="text-gray-700">{c.name}</span>
-              </label>
-            ))}
-          </div>
+      <div className="w-full lg:w-1/4 m-2">
+  <h1 className="text-center font-sans font-semibold text-xl mb-4">
+    Filter by Category
+  </h1>
+  <div className="flex flex-col">
+    {categories?.map((c) => (
+      <label key={c._id} className="flex items-center space-x-2 mb-2">
+        <input
+          type="checkbox"
+          className="form-checkbox text-blue-500"
+          onChange={(e) => handleFilter(e.target.checked, c._id)}
+        />
+        <span className="text-gray-700">{c.name}</span>
+      </label>
+    ))}
+  </div>
 
-          {/* Price Filter */}
+  {/* Price Filter */}
 
-          <h1 className="mt-5 text-center font-semibold text-xl">
-            Filter by Price
-          </h1>
+  <div className="mt-6 text-center font-semibold text-xl mb-4">
+    <label htmlFor="priceFilter" className="block mb-2">
+      Filter by Price
+    </label>
+    <select
+      id="priceFilter"
+      className="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+      onChange={(e) => setRadio(e.target.value)}
+    >
+      <option value="">Select Price Range</option>
+      {Prices?.map((p) => (
+        <option key={p._id} value={p.array}>
+          {p.name}
+        </option>
+      ))}
+    </select>
+  </div>
 
-          <div className="flex flex-col">
-            <Radio.Group onChange={(e) => setRadio(e.target.value)}>
-              {Prices?.map((p) => (
-                <div className="mb-2" key={p._id}>
-                  <Radio
-                    className="inline-flex items-center space-x-2"
-                    value={p.array}
-                  >
-                    <span className="text-gray-700">{p.name}</span>
-                  </Radio>
-                </div>
-              ))}
-            </Radio.Group>
-          </div>
+  <div className="mt-6 ml-2 flex flex-col">
+    <button
+      onClick={() => window.location.reload()}
+      className="bg-blue-500 text-white rounded w-full lg:w-auto px-4 py-2 transition duration-300 ease-in-out hover:bg-blue-600"
+    >
+      Reset Filters
+    </button>
+  </div>
+</div>
 
-          <div className="mt-5 ml-2 flex flex-col">
-            <button
-              onClick={() => window.location.reload()}
-              className="bg-blue-500 text-white rounded w-32 px-4 py-2"
-            >
-              Reset Filter
-            </button>
-          </div>
-        </div>
         <div className="w-full lg:w-3/4">
           <h1 className="text-center font-bold text-3xl">All Products</h1>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-8">

@@ -13,13 +13,14 @@ const CartPage = () => {
   const [clientToken, setClientToken] = useState("");
   const [instance, setInstance] = useState("");
   const [loading, setLoading] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState("card"); // Default to card payment
   const navigate = useNavigate();
 
-  //Total Price
+  // Total Price
   const totalPrice = () => {
     try {
       let total = 0;
-      cart?.map((item) => {
+      cart?.forEach((item) => {
         total = total + item.price;
       });
       return total.toLocaleString("en-NP", {
@@ -31,7 +32,7 @@ const CartPage = () => {
     }
   };
 
-  //Remove Item from  cart
+  // Remove Item from cart
   const removeItem = (pid) => {
     try {
       let myCart = [...cart];
@@ -44,7 +45,7 @@ const CartPage = () => {
     }
   };
 
-  //Get Payment Token
+  // Get Payment Token
   const getToken = async () => {
     try {
       const { data } = await axios.get("/api/v1/product/braintree/token");
@@ -61,15 +62,25 @@ const CartPage = () => {
   const handlePayment = async () => {
     try {
       setLoading(true);
-      const { nonce } = await instance.requestPaymentMethod();
-      const { data } = await axios.post("/api/v1/product/braintree/payment", {
-        nonce,
-        cart,
-      });
+      // Implement payment handling based on the selected method
+      if (paymentMethod === "card") {
+        const { nonce } = await instance.requestPaymentMethod();
+        const { data } = await axios.post("/api/v1/product/braintree/payment", {
+          nonce,
+          cart,
+          address: auth?.user?.address // Include address in payment request
+        });
+        toast.success("Card Payment Successful.");
+      } else if (paymentMethod === "khalti") {
+        // Implement Khalti payment logic
+        toast.info("Khalti Payment Processing...");
+      } else if (paymentMethod === "cash") {
+        // Implement Cash in Hand payment logic
+        toast.info("Please pay in cash upon delivery.");
+      }
       setLoading(false);
       localStorage.removeItem("cart");
       setCart([]);
-
       toast.success("Payment Successful.");
       setTimeout(() => {
         navigate("/dashboard/user/orders");
@@ -77,6 +88,7 @@ const CartPage = () => {
     } catch (error) {
       console.log(error);
       setLoading(false);
+      toast.error("An error occurred while processing your request.");
     }
   };
 
@@ -140,62 +152,67 @@ const CartPage = () => {
               Total:{totalPrice()}
             </h1>
 
-            {auth?.user?.address ? (
-              <>
-                <div className="mb-3">
-                  <h1> Current Address</h1>
-                  <h1>{auth?.user?.address}</h1>
-                  <button
-                    onClick={() => navigate("/dashboard/user/profile")}
-                    className="bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded"
-                  >
-                    Update Address
-                  </button>
-                </div>
-              </>
-            ) : (
-              <div>
-                {auth?.token ? (
-                  <button
-                    onClick={() => navigate("/dashboard/user/profile")}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
-                  >
-                    Update Address
-                  </button>
+            {/* Payment method selection */}
+            <div className="flex flex-col items-start mt-6">
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="card"
+                  value="card"
+                  checked={paymentMethod === "card"}
+                  onChange={() => setPaymentMethod("card")}
+                />
+                <label htmlFor="card" className="ml-2">Card Payment</label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="khalti"
+                  value="khalti"
+                  checked={paymentMethod === "khalti"}
+                  onChange={() => setPaymentMethod("khalti")}
+                />
+                <label htmlFor="khalti" className="ml-2">Khalti</label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="cash"
+                  value="cash"
+                  checked={paymentMethod === "cash"}
+                  onChange={() => setPaymentMethod("cash")}
+                />
+                <label htmlFor="cash" className="ml-2">Cash in Hand</label>
+              </div>
+            </div>
+
+            {/* Braintree Drop-in UI component for card payment */}
+            {paymentMethod === "card" && (
+              <div className="mt-6">
+                {!clientToken || !cart?.length ? (
+                  ""
                 ) : (
-                  <button
-                    onClick={() => navigate("/login")}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
-                  >
-                    Please Login to Check out{" "}
-                  </button>
+                  <>
+                    <DropIn
+                      options={{
+                        authorization: clientToken,
+                        paypal: {
+                          flow: "vault",
+                        },
+                      }}
+                      onInstance={(instance) => setInstance(instance)}
+                    />
+                    <button
+                      className="bg-white hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded"
+                      onClick={handlePayment}
+                      disabled={loading || !instance || !auth?.user?.address}
+                    >
+                      {loading ? "Processing...." : "Payment"}
+                    </button>
+                  </>
                 )}
               </div>
             )}
-            <div className="mt-4">
-              {!clientToken || !cart?.length ? (
-                ""
-              ) : (
-                <>
-                  <DropIn
-                    options={{
-                      authorization: clientToken,
-                      paypal: {
-                        flow: "vault",
-                      },
-                    }}
-                    onInstance={(instance) => setInstance(instance)}
-                  />
-                  <button
-                    className="bg-white hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded"
-                    onClick={handlePayment}
-                    disabled={loading || !instance || !auth?.user?.address}
-                  >
-                    {loading ? "Processing...." : "Payment"}
-                  </button>
-                </>
-              )}
-            </div>
           </div>
         </div>
       </div>

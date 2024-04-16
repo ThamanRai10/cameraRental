@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import DropIn from "braintree-web-drop-in-react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Khalti from "../khalti/Khalti";
 
 const CartPage = () => {
   const [cart, setCart] = useCart();
@@ -164,6 +165,8 @@ const CartPage = () => {
                 />
                 <label htmlFor="card" className="ml-2">Card Payment</label>
               </div>
+
+
               <div className="flex items-center">
                 <input
                   type="radio"
@@ -172,9 +175,11 @@ const CartPage = () => {
                   checked={paymentMethod === "khalti"}
                   onChange={() => setPaymentMethod("khalti")}
                 />
-                <label htmlFor="khalti" className="ml-2">Khalti</label>
+                <label htmlFor="khalti" className="ml-2">Khalti
+                </label>
               </div>
-              <div className="flex items-center">
+
+              {/* <div className="flex items-center">
                 <input
                   type="radio"
                   id="cash"
@@ -183,7 +188,7 @@ const CartPage = () => {
                   onChange={() => setPaymentMethod("cash")}
                 />
                 <label htmlFor="cash" className="ml-2">Cash in Hand</label>
-              </div>
+              </div> */}
             </div>
 
             {/* Braintree Drop-in UI component for card payment */}
@@ -211,6 +216,13 @@ const CartPage = () => {
                     </button>
                   </>
                 )}
+              </div>
+            )}
+
+
+{paymentMethod === "khalti" && (
+              <div className="mt-6">
+                <Khalti/>
               </div>
             )}
           </div>

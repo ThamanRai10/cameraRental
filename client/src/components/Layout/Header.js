@@ -48,7 +48,7 @@ const Header = () => {
             <div className="hidden md:block">
               <div className="  flex items-baseline space-x-6">
                 <NavLink
-                  to="Product"
+                  to="/Product"
                   // activeClassName="text-white bg-gray-900"
                   className="text-gray-100 hover:bg-blue-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >

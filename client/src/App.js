@@ -47,6 +47,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/category" element={<Policy />} />
         <Route path="/cart" element={<CartPage />} />
+        
         {/* <Route path="/Servies" element ={<Services/>}/> */}
 
         <Route path="/dashboard" element={<PrivateRoute />}>

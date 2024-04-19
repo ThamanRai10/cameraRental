@@ -54,12 +54,12 @@ const Header = () => {
                 >
                   Products
                 </NavLink>
-                <NavLink
+                {/* <NavLink
                     to="/rentalPage"
                     className="text-gray-100 hover:bg-blue-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Rent 
-                  </NavLink>
+                  </NavLink> */}
 
                 <Badge count={cart?.length}>
                   <NavLink

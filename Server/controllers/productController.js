@@ -405,11 +405,11 @@ export const braintreePaymentController = async (req, res) => {
             emailContent += `   Description: ${product.description}\n`;
             emailContent += `   Price: Rs${product.price.toFixed(2)}\n\n`;
           });
-          emailContent += `Total Price: $${total.toFixed(2)}\n\n`;
+          emailContent += `Total Price: Rs ${total.toFixed(2)}\n\n`;
 
           emailContent += "Shipping Address:\n";
           emailContent += `Name: ${name}\n`;
-          emailContent += `Address: ${address}\n`;
+          // emailContent += `Address: ${address}\n`;
           emailContent += `Email: ${email}`;
 
           // Sending email

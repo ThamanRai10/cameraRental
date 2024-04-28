@@ -16,10 +16,17 @@ const orderSchema = new mongoose.Schema(
     status: {
       type: String,
       default: "Not Process",
-      enum: ["Not Process", "Processing", "Shipped", "deliverd", "cancel"],
+      enum: ["Not Process", "Processing", "Shipped", "Delivered", "Cancel"],
+    },
+    paymentStatus: {
+      type: String,
+      default: "Card", // Default payment status
+      enum: ["Card", "Cash in Hand", "Not Paid"],
     },
   },
   { timestamps: true }
 );
 
 export default mongoose.model("Order", orderSchema);
+
+

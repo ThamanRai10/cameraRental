@@ -51,19 +51,19 @@ export const registerController = async (req, res) => {
       password: hashedPassword,
     }).save();
 
-    let emailContent = `📧 <strong>Dear ${name},<\strong>\n\n`;
-    emailContent  += "Your account has been Created"
-    sendMail({
-      email: req.user.email,
-      subject: "Account - Camera Rental ",
-      message: emailContent
-    });
+    // let emailContent = `📧 <strong>Dear ${name},<\strong>\n\n`;
+    // emailContent  += "Your account has been Created"
+    // sendMail({
+    //   email: req.user.email,
+    //   subject: "Account - Camera Rental ",
+    //   message: emailContent
+    // });
 
-    res.status(201).send({
-      success: true,
-      message: "User Register Successfully",
-      user,
-    });
+    // res.status(201).send({
+    //   success: true,
+    //   message: "User Register Successfully",
+    //   user,
+    // });
 
 
   } catch (error) {
@@ -309,6 +309,29 @@ export const orderStatusController = async (req, res) => {
     });
   }
 };
+
+// Update Payment Status Order
+export const paymentStatuscontroller = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { status } = req.body; // Correctly destructure status from the request body
+
+    const order = await orderModel.findByIdAndUpdate(
+      orderId,
+      { paymentStatus: status }, // Update the paymentStatus field with the received status
+      { new: true }
+    );
+    res.json(order);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in Updating orders",
+      error,
+    });
+  }
+};
+
 
 // Get all users
 export const getAllUsers = async (req, res) => {

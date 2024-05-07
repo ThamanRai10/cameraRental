@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import DropIn from "braintree-web-drop-in-react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Khalti from "../khalti/Khalti";
+import KhaltiPaymentForm from "../khalti/KhaltiPaymentForm";
 
 const CartPage = () => {
   const [cart, setCart] = useCart();
@@ -61,36 +61,6 @@ const CartPage = () => {
   }, [auth?.token]);
 
   const handlePayment = async () => {
-    try {
-      setLoading(true);
-      // Implement payment handling based on the selected method
-      if (paymentMethod === "card") {
-        const { nonce } = await instance.requestPaymentMethod();
-        const { data } = await axios.post("/api/v1/product/braintree/payment", {
-          nonce,
-          cart,
-          address: auth?.user?.address // Include address in payment request
-        });
-        toast.success("Card Payment Successful.");
-      } else if (paymentMethod === "khalti") {
-        // Implement Khalti payment logic
-        toast.info("Khalti Payment Processing...");
-      } else if (paymentMethod === "cash") {
-        // Implement Cash in Hand payment logic
-        toast.info("Please pay in cash upon delivery.");
-      }
-      setLoading(false);
-      localStorage.removeItem("cart");
-      setCart([]);
-      toast.success("Payment Successful.");
-      setTimeout(() => {
-        navigate("/dashboard/user/orders");
-      }, 1000);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-      toast.error("An error occurred while processing your request.");
-    }
   };
 
   return (
@@ -166,7 +136,6 @@ const CartPage = () => {
                 <label htmlFor="card" className="ml-2">Card Payment</label>
               </div>
 
-
               <div className="flex items-center">
                 <input
                   type="radio"
@@ -178,17 +147,6 @@ const CartPage = () => {
                 <label htmlFor="khalti" className="ml-2">Khalti
                 </label>
               </div>
-
-              {/* <div className="flex items-center">
-                <input
-                  type="radio"
-                  id="cash"
-                  value="cash"
-                  checked={paymentMethod === "cash"}
-                  onChange={() => setPaymentMethod("cash")}
-                />
-                <label htmlFor="cash" className="ml-2">Cash in Hand</label>
-              </div> */}
             </div>
 
             {/* Braintree Drop-in UI component for card payment */}
@@ -219,10 +177,10 @@ const CartPage = () => {
               </div>
             )}
 
-
-{paymentMethod === "khalti" && (
+            {/* Khalti Payment Form */}
+            {paymentMethod === "khalti" && (
               <div className="mt-6">
-                <Khalti/>
+                <KhaltiPaymentForm handlePayment={handlePayment} />
               </div>
             )}
           </div>

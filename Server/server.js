@@ -7,6 +7,7 @@ import categoryRoutes from "./routes/categoryRoute.js";
 import productRoutes from "./routes/productRoute.js";
 import cors from "cors";
 
+
 //Config ENV
 
 dotenv.config({ path: "./config.env" });
@@ -42,4 +43,9 @@ const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server Running on ${PORT}`);
 });
+
+
+
+
+
 

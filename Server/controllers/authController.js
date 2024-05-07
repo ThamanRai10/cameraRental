@@ -34,7 +34,7 @@ export const registerController = async (req, res) => {
     if (existingUser) {
       return res.status(200).send({
         success: true,
-        message: "User Already Registered",
+        message: "User has been Registered",
       });
     }
     //register User
@@ -318,7 +318,7 @@ export const paymentStatuscontroller = async (req, res) => {
 
     const order = await orderModel.findByIdAndUpdate(
       orderId,
-      { paymentStatus: status }, // Update the paymentStatus field with the received status
+      { paymentStatus}, // Update the paymentStatus field with the received status
       { new: true }
     );
     res.json(order);

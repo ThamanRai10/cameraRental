@@ -8,6 +8,7 @@ import { sendMail } from "../helpers/sendMail.js";
 
 dotenv.config({ path: "./config.env" });
 
+
 //Payment Gateway
 var gateway = new braintree.BraintreeGateway({
   environment: braintree.Environment.Sandbox,
@@ -429,6 +430,8 @@ export const braintreePaymentController = async (req, res) => {
     res.status(500).send({ message: "Payment Unsuccessful" });
     console.log(error);
   }
+
+  
 };
 
 

@@ -17,11 +17,12 @@ const AdminOrder = () => {
     "Delivered",
     "Cancel",
   ]);
-
-  const [paymentMethods] = useState(["Cash in Hand", "Card Payment"]);
-
+  const [paymentMethods, setPaymentMethods] = useState([
+    "Card",
+    "Cash in Hand",
+    "Pending",
+  ]);
   const [changeStatus, setChangeStatus] = useState("");
-
   const [orders, setOrders] = useState([]);
 
   const getOrders = async () => {
@@ -42,7 +43,6 @@ const AdminOrder = () => {
       const { data } = await axios.put(`/api/v1/auth/order-status/${orderId}`, {
         status: value,
       });
-      // Update the specific order's status in the orders state
       setOrders((prevOrders) =>
         prevOrders.map((order) =>
           order._id === orderId ? { ...order, status: value } : order
@@ -55,13 +55,12 @@ const AdminOrder = () => {
 
   const handleChangePaymentMethod = async (orderId, value) => {
     try {
-      const { data } = await axios.put(`/api/v1/auth/payment-status/${orderId}`, {
-        paymentStatus: value,
+      const { data } = await axios.put(`/api/v1/auth/payment-method/${orderId}`, {
+        paymentMethod: value,
       });
-      // Update the specific order's payment status in the orders state
       setOrders((prevOrders) =>
         prevOrders.map((order) =>
-          order._id === orderId ? { ...order, paymentStatus: value } : order
+          order._id === orderId ? { ...order, paymentMethod: value } : order
         )
       );
     } catch (error) {
@@ -103,7 +102,7 @@ const AdminOrder = () => {
                           bordered={false}
                           onChange={(value) => handleChange(o._id, value)}
                           defaultValue={o?.status}
-                          value={o?.status} // Add value prop to set the selected value correctly
+                          value={o?.status}
                         >
                           {status.map((s, i) => (
                             <Option key={i} value={s}>
@@ -121,12 +120,12 @@ const AdminOrder = () => {
                       <td className="px-4 py-2">
                         {o?.payment.success ? "Success" : "Failed"}
                       </td>
-                
-                      <Select
+                      <td className="px-4 py-2">
+                        <Select
                           bordered={false}
                           onChange={(value) => handleChangePaymentMethod(o._id, value)}
-                          defaultValue={o?.paymentStatus} // Remove defaultValue
-                          value={o?.paymentStatus} // Remove value
+                          defaultValue='pending'
+                          value={o?.paymentMethod}
                         >
                           {paymentMethods.map((method, i) => (
                             <Option key={i} value={method}>
@@ -134,7 +133,7 @@ const AdminOrder = () => {
                             </Option>
                           ))}
                         </Select>
-                    
+                      </td>
                     </tr>
                   ))}
                 </tbody>

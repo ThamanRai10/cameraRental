@@ -42,6 +42,8 @@ const Orders = () => {
                     <th className="px-4 py-2">Product Name</th> {/* New column */}
                     <th className="px-4 py-2">Quantity</th>
                     <th className="px-4 py-2">Payment</th>
+                    <th className="px-4 py-2">Payment Method</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -66,6 +68,7 @@ const Orders = () => {
                       <td className="px-4 py-2">
                         {o?.payment?.success ? "Success" : "Failed"}
                       </td>
+                      <td className="px-4 py-2">{o?.payment}</td>
                     </tr>
                   ))}
                 </tbody>

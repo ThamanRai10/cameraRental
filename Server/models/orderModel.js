@@ -20,8 +20,9 @@ const orderSchema = new mongoose.Schema(
     },
     paymentStatus: {
       type: String,
-      default: "Card", // Default payment status
-      enum: ["Card", "Cash in Hand", "Not Paid"],
+      default: "Pending", // Default payment status
+      enum: ["Card", "Cash in Hand", "Pending"],
+      require:true
     },
   },
   { timestamps: true }

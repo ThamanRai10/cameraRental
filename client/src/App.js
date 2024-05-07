@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import './App.css';
 // import Hero from "./pages/hero";
 import Home from "./Home"
 import HomePage from "./pages/HomePage";
@@ -29,6 +30,7 @@ import SearchPage from "./pages/SearchPage";
 import ProductDetails from "./pages/ProductDetails";
 import CartPage from "./pages/CartPage";
 import AdminOrder from "./pages/admin/AdminOrder";
+import OrderDetails from "./pages/admin/OrderDetails";
 
 function App() {
   return (
@@ -64,6 +66,7 @@ function App() {
           <Route path="admin/orders" element={<AdminOrder />} />
           <Route path="admin/product/:slug" element={<UpdateProduct />} />
           <Route path="admin/users" element={<Users />} />
+          <Route path="admin/order-details" element={<OrderDetails />} />
         </Route>
 
         <Route path="*" element={<Pagenotfound />} />
